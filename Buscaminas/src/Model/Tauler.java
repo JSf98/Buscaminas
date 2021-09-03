@@ -50,16 +50,25 @@ public class Tauler {
     private void rellenaTauler(int nmines) {
         Random rnd = new Random();
         
+        //Posam mines
         for (int i = 0; i < nmines; i++) {
             int x = rnd.nextInt(informacio.length);
             int y = rnd.nextInt(informacio[0].length);
         
             //Significa que no hi ha cap mina anteriorment
             if (informacio[x][y].nombre != -1) {
-                informacio[x][y].nombre = -1; 
-                actualitzaAdjacents(x, y);
+                informacio[x][y].nombre = -1;
             }else{
                 i--;
+            }
+        }
+        
+        //Actualitzam adjacents
+        for (int i = 0; i < informacio.length; i++) {
+            for (int j = 0; j < informacio[i].length; j++) {
+                if (informacio[i][j].nombre == -1) {
+                    actualitzaAdjacents(i, j);
+                }
             }
         }
     }
